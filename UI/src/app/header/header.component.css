@@ -1,0 +1,46 @@
+.header{
+    background-color: #16a596; 
+    color: #f6f5f1;
+}
+.header-frame{
+    margin-left: 20px; 
+    margin-right: 20px;
+}
+.navbar-dark{
+    font-size: 18px;
+}
+.colour-me{
+    color:#f6f5f1 !important;
+    font-weight: bold;
+    margin-left: 40px;
+}
+.dropdown-menu{
+    background: transparent;
+    border: none;
+}
+.dropdown-item{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+.dropdown-item:hover{
+    color: black;
+}
+.button{
+    float: right;
+    width: 100px;
+}
+.header-banner{
+    font-size: 40px; 
+    margin-top: 50px;
+}
+.small{
+    font-size: 18px;
+}
+.form-inline{
+    margin-top: 20px;
+}
+.form-control{
+    width: 500px;
+    height: 40px;
+}
