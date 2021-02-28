@@ -6061,6 +6061,7 @@
       "Microsoft.AspNetCore.Cors >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.3",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.3",
+      "Microsoft.EntityFrameworkCore.Design >= 5.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.3",
       "Swashbuckle.AspNetCore >= 6.0.2"
@@ -6072,11 +6073,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal\\WebAPI\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal-Demo\\WebAPI\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal\\WebAPI\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal-Demo\\WebAPI\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\HARSHIT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal\\WebAPI\\WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\HARSHIT\\Desktop\\Community-Portal-Demo\\WebAPI\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HARSHIT\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6118,6 +6119,12 @@
             "version": "[5.0.3, )"
           },
           "Microsoft.AspNetCore.Identity.UI": {
+            "target": "Package",
+            "version": "[5.0.3, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[5.0.3, )"
           },

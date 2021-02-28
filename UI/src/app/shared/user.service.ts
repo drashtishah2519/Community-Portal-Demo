@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { ConfirmedValidator } from '../custom-validators';
-import { RegistrationComponent } from '../registration/registration.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +27,12 @@ export class UserService {
       validator: ConfirmedValidator('password', 'confirmpassword')
     }
   );
-
+  get f() { return this.formModel.controls; }
+  
   register(){
     var body = {
       UserName : this.formModel.value.UserName,
       Email : this.formModel.value.Email,
-      // Email : this.registration.registerForm.value.Email,
       Password : this.formModel.value.Password,
       FirstName : this.formModel.value.FirstName,
       LastName : this.formModel.value.LastName0,

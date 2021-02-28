@@ -9,53 +9,53 @@
                    <header>Create New Account</header>
                 
                 <div class="form-group">
-                   <input class="myInput form-control" placeholder="FirstName" type="text" id="firstname" formControlName="FirstName" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" /> 
-                         <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-                            <div *ngIf="f.firstname.errors.required">FirstName is required</div>
-                            <div *ngIf="f.firstname.errors.pattern">FirstName must be a valid</div>
+                   <input class="myInput form-control" placeholder="FirstName" type="text" id="firstname" formControlName="FirstName" [ngClass]="{ 'is-invalid': submitted && this.service.f.FirstName.errors }" /> 
+                         <div *ngIf="submitted && this.service.f.FirstName.errors" class="invalid-feedback">
+                            <div *ngIf="service.f.FirstName.errors?.required">FirstName is required</div>
+                            <div *ngIf="service.f.FirstName.errors?.pattern">FirstName must be a valid</div>
                          </div>
                 </div>
  
                 <div class="form-group">
-                      <input class="myInput form-control" placeholder="LastName" type="text" id="lastname" formControlName="LastName" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" /> 
-                         <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                            <div *ngIf="f.lastname.errors.required">LastName is required</div>
-                            <div *ngIf="f.lastname.errors.pattern">LastName must be a valid </div>
+                      <input class="myInput form-control" placeholder="LastName" type="text" id="lastname" formControlName="LastName" [ngClass]="{ 'is-invalid': submitted && this.service.f.LastName.errors }" /> 
+                         <div *ngIf="submitted && this.service.f.LastName.errors" class="invalid-feedback">
+                            <div *ngIf="this.service.f.LastName.errors?.required">LastName is required</div>
+                            <div *ngIf="this.service.f.LastName.errors?.pattern">LastName must be a valid </div>
                          </div>
                 </div>
  
                 <div class="form-group">
-                   <input class="myInput form-control" placeholder="Username" type="text" id="username" formControlName="UserName" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" /> 
-                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                            <div *ngIf="f.username.errors.required">Username is required</div>
-                            <div *ngIf="f.username.errors.pattern">Username must be a valid</div>
+                   <input class="myInput form-control" placeholder="Username" type="text" id="username" formControlName="UserName" [ngClass]="{ 'is-invalid': submitted && this.service.f.UserName.errors }" /> 
+                      <div *ngIf="submitted && this.service.f.UserName.errors" class="invalid-feedback">
+                            <div *ngIf="this.service.f.UserName.errors?.required">Username is required</div>
+                            <div *ngIf="this.service.f.UserName.errors?.pattern">Username must be a valid</div>
                       </div>
                 </div>
                 
                 <div class="form-group">
-                   <input class="myInput form-control" placeholder="Email" type="email" id="email" formControlName="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" /> 
-                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.email">Email must be a valid Email Address</div>
+                   <input class="myInput form-control" placeholder="Email" type="email" id="email" formControlName="Email" [ngClass]="{ 'is-invalid': submitted && this.service.f.Email.errors }" /> 
+                         <div *ngIf="submitted && this.service.f.Email.errors" class="invalid-feedback">
+                            <div *ngIf="this.service.f.Email.errors?.required">Email is required</div>
+                            <div *ngIf="this.service.f.Email.errors?.email">Email must be a valid Email Address</div>
                          </div>
                 </div>
              
                 <div class="form-group">
-                   <input class="myInput form-control" placeholder="Password" type="password" id="password" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" /> 
-                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Password is required</div>
-                      <div *ngIf="f.password.errors.minlength">Password must be a atleast 6 characters</div>
-                      <div *ngIf="f.password.errors.pattern">Password must have atleast 1 small , 1 capital and 1 special characters</div>
+                   <input class="myInput form-control" placeholder="Password" type="password" id="password" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && this.service.f.Password.errors }" /> 
+                   <div *ngIf="submitted && this.service.f.Password.errors" class="invalid-feedback">
+                      <div *ngIf="this.service.f.Password.errors?.required">Password is required</div>
+                      <div *ngIf="this.service.f.Password.errors?.minlength">Password must be a atleast 6 characters</div>
+                      <div *ngIf="this.service.f.Password.errors?.pattern">Password must have atleast 1 small , 1 capital and 1 special characters</div>
                    </div>
                 </div>
  
                 <div class="form-group">
-                   <input class="myInput form-control" placeholder="Confirm Password" type="password" id="confirmpassword" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }" /> 
-                <div *ngIf="submitted && f.confirmpassword.errors" class="invalid-feedback">
-                   <div *ngIf="f.confirmpassword.errors.required">Confirm-Password is required</div>
-                   <div *ngIf="f.confirmpassword.errors.minlength">Confirm-Password must be a atleast 8 characters</div>
-                   <div *ngIf="f.confirmpassword.errors.pattern">Confirm Password must have atleast 1 small , 1 capital and 1 special characters</div>
-                   <div *ngIf="f.confirmpassword.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                   <input class="myInput form-control" placeholder="Confirm Password" type="password" id="confirmpassword" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': submitted && this.service.f.confirmpassword.errors }" /> 
+                <div *ngIf="submitted && this.service.f.confirmpassword.errors" class="invalid-feedback">
+                   <div *ngIf="this.service.f.confirmpassword.errors?.required">Confirm-Password is required</div>
+                   <div *ngIf="this.service.f.confirmpassword.errors?.minlength">Confirm-Password must be a atleast 8 characters</div>
+                   <div *ngIf="this.service.f.confirmpassword.errors?.pattern">Confirm Password must have atleast 1 small , 1 capital and 1 special characters</div>
+                   <div *ngIf="this.service.f.confirmpassword.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
                 </div>
                 </div>
  

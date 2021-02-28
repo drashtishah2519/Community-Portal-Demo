@@ -24,15 +24,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // //Add User form validations
     this.loginForm = this.formBuilder.group({
-      // username: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
      
-      // password: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
+      password: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
       });
   }
 
   get f() { return this.loginForm.controls; }
   
-  onSubmit(form:NgForm) {
+  onSubmit(form) {
     this.submitted = true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
