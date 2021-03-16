@@ -1,14 +1,11 @@
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { UserService } from 'src/app/shared/user.service';
-=======
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { addClass, removeClass, Browser } from '@syncfusion/ej2-base';
 import { RichTextEditor, Toolbar, Link, Image, HtmlEditor, QuickToolbar, Table, FileManager } from '@syncfusion/ej2-richtexteditor';
 import { NgForm } from '@angular/forms';
 RichTextEditor.Inject(Toolbar, Link, Image, HtmlEditor, QuickToolbar, Table, FileManager);
 
->>>>>>> 4c85ba37d3c0974f5a928b8f3b8ab80cb8acffff
 
 @Component({
   selector: 'app-article-create',
@@ -20,25 +17,14 @@ export class ArticleCreateComponent implements OnInit {
   title = 'article-create';
   userDetails: any;
 
-<<<<<<< HEAD
   constructor(private _router : Router,private service:UserService) { }
 
-  ngOnInit(): void {
-    this.service.getUserProfile().subscribe(
-      (res) => {
-        this.userDetails = res;
-      }, (err) => {
-        console.log(err);
-      }
-    );
-  }
-  close(){
-    alert('logged out');
-    localStorage.removeItem('token');
-    this._router.navigate(['/']);
-  }
-}
-=======
+  // ngOnInit(): void {
+    
+  // }
+  
+
+
   // handle(e){
   //   console.log('Change input file')
   // }
@@ -50,11 +36,18 @@ export class ArticleCreateComponent implements OnInit {
 	//    this.rteEle.element.focus();
   //  }
 
-    constructor(private _router : Router) { }
+    // constructor(private _router : Router) { }
   	  url;
 	    msg = "";
 
     ngOnInit(): void {
+      this.service.getUserProfile().subscribe(
+        (res) => {
+          this.userDetails = res;
+        }, (err) => {
+          console.log(err);
+        }
+      );
       let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
   
       let iframeRTE: RichTextEditor = new RichTextEditor({
@@ -125,8 +118,11 @@ export class ArticleCreateComponent implements OnInit {
     }
 
   		close(){
-    		this._router.navigate(['/'])
+        alert('logged out');
+        localStorage.removeItem('token');
+        this._router.navigate(['/']);
   		}
+
       onSubmit(form: NgForm): void {
         alert(form.value.name);
       }   
@@ -153,5 +149,10 @@ export class ArticleCreateComponent implements OnInit {
 		// }
 	  //   }
 
+    // close(){
+      // alert('logged out');
+      // localStorage.removeItem('token');
+      // this._router.navigate(['/']);
+    // }
 }
->>>>>>> 4c85ba37d3c0974f5a928b8f3b8ab80cb8acffff
+
