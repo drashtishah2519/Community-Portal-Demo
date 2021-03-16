@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,7 +39,8 @@ import { AuthInterceptor } from './auth/auth.intercepter';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    RichTextEditorModule
   ],
   providers: [UserService,{
     provide: HTTP_INTERCEPTORS,
