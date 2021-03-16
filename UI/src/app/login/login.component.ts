@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       );
       this.showModal = false;
       console.log("WOW!! You have successfully logged in");
-      this._router.navigate(['/user-profile'])
+      // this._router.navigate(['/user-profile'])
     }
   }
   gotoregistration(){

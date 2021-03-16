@@ -36,6 +36,7 @@ namespace WebAPI.Controllers
         // POST request :: /api/ApplicationUser/Register
         public async Task<Object> PostApplicationUser(ApplicationUserModel model)
         {
+            model.Role = "Viewer";
             var applicationUser = new ApplicationUser()
             {
                 UserName = model.UserName,
@@ -47,6 +48,7 @@ namespace WebAPI.Controllers
             try
             {
                 var result =await userManager.CreateAsync(applicationUser, model.Password);  /// Password will be encrypted
+                await userManager.AddToRoleAsync(applicationUser, model.Role);
                 return Ok(result);
             } catch(Exception e)
             {

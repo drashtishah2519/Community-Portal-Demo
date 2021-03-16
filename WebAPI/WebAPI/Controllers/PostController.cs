@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,11 +15,31 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
+        private readonly IConfiguration configuration;
+        public PostController(IConfiguration config)
+        {
+            this.configuration = config;
+        }
         // GET: api/<PostController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get()
         {
-            return new string[] { "value1", "value2" };
+            string query = @"select * from Post";
+            DataTable table = new DataTable();
+            string sqlDataSource = configuration.GetConnectionString("DataConnection");
+            SqlDataReader dataReader;
+            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    dataReader = command.ExecuteReader();
+                    table.Load(dataReader);
+                    dataReader.Close();
+                    connection.Close();
+                }
+            }
+            return new JsonResult(table);
         }
 
         // GET api/<PostController>/5

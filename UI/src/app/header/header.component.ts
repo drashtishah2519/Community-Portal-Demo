@@ -18,15 +18,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem('token')!= null){
       this.loggedIn = true;
-    }
-
-    this.service.getUserProfile().subscribe(
-      (res) => {
-        this.userDetails = res;
-      }, (err) => {
-        console.log(err);
-      }
-    );
+      this.service.getUserProfile().subscribe(
+        (res) => {
+          this.userDetails = res;
+          console.log(this.userDetails);
+          
+        }, (err) => {
+          console.log(err);
+        }
+      );
+    }    
   }
   login(){
     if(localStorage.getItem('token')==null)

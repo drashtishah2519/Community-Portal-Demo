@@ -208,3 +208,9 @@ C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\obj\Debug\net5.0\We
 C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\obj\Debug\net5.0\ref\WebAPI.dll
 C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\obj\Debug\net5.0\WebAPI.pdb
 C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\obj\Debug\net5.0\WebAPI.genruntimeconfig.cache
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\HARSHIT\Desktop\Community-Portal-Demo\WebAPI\WebAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll

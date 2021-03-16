@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'app', component: AppComponent},
   {path: 'user-profile', component: UserProfileComponent},
-  {path: 'article-create', component:ArticleCreateComponent}
+  {path: 'article-create', component:ArticleCreateComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

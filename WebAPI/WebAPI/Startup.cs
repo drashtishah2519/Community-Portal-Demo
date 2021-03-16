@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using Newtonsoft.Json.Serialization;
 
 namespace WebAPI
 {
@@ -42,10 +43,19 @@ namespace WebAPI
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
 
             services.AddDbContext<ArticleDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataConnection")));
 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()
+            );
 
             //Password Validation
 
