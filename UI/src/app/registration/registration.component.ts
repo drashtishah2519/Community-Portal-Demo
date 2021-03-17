@@ -25,13 +25,14 @@ export class RegistrationComponent implements OnInit {
     {
       this.service.register().subscribe(
         (res : any) => {
-          if(res.succeeded){
+          if(res.Succeeded){
             this.service.formModel.reset();
             this._router.navigate(['/login'])
             this.showModal = false;
             console.log("WOW!! You have successfully Registered..Directing to Login");
           } else{
-            res.errors.forEach((element: any) => {
+            console.log(res);
+            res.Errors.forEach((element: any) => {
               switch(element.code){
                 case 'DuplicateUserName':
                   alert('UserName already exist');
@@ -41,6 +42,7 @@ export class RegistrationComponent implements OnInit {
                   break;
               }
             });
+            // console.log(res.Errors);
           }
         },
         err => 

@@ -24,7 +24,7 @@ export class UserService {
 
     confirmpassword: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
     },{ 
-      validator: ConfirmedValidator('password', 'confirmpassword')
+      validator: ConfirmedValidator('Password', 'confirmpassword')
     }
   );
   get f() { return this.formModel.controls; }
