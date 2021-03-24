@@ -13,6 +13,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 namespace WebAPI
 {
@@ -105,6 +106,10 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             //articleContext.Database.EnsureCreated();
 
@@ -124,9 +129,16 @@ namespace WebAPI
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Could not find anything");
             });
 
         }
