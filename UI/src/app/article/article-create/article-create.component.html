@@ -11,7 +11,7 @@
             <a class="nav-link colour-me" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link colour-me" href="#">Articles</a>
+            <a class="nav-link colour-me" href="/article-posts">Articles</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle colour-me" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,15 +53,15 @@
 
 <div class="container">
   <h1 class="text-center">Create Article</h1>
-  <form (ngSubmit)="onSubmit(rteForm)" #rteForm="ngForm">
+  <form #form="ngForm" #rteForm="ngForm" (ngSubmit)="onSubmit(form)" id="form-element">
       <div class="mb-3">
       <label class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" placeholder="Title..">
+      <input type="text" class="form-control" id="title" placeholder="Title.." name="title" autocomplete="off">
       </div>
       
       <div class="mb-3">
         <label for="formFile" class="form-label">Select Category</label>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example" name="category" aria-placeholder="Choose Category">
           <option selected>Choose Category</option>
           <option value="1">Fashion</option>
           <option value="2">Food</option>
@@ -86,7 +86,6 @@
         <div class="sample-container">
           <div class="default-section">
             <div id="iframeRTE">
-
             </div>
           </div>
         </div>

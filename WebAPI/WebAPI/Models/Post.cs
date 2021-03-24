@@ -16,7 +16,7 @@ namespace WebAPI.Models
         [Required]
         public string Text { get; set; }
         public DateTime PostedOn { get; set; }
-
+        [Required]
         [ForeignKey("Category")]
         public short CategoryId { get; set; }
         

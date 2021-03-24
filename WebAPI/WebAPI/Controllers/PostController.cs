@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,15 +45,46 @@ namespace WebAPI.Controllers
 
         // GET api/<PostController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public JsonResult Get(String id)
         {
-            return "value";
+            string query = @"select * from Post where Id = '" + id + "'";
+            DataTable table = new DataTable();
+            string sqlDataSource = configuration.GetConnectionString("DataConnection");
+            SqlDataReader dataReader;
+            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    dataReader = command.ExecuteReader();
+                    table.Load(dataReader);
+                    dataReader.Close();
+                    connection.Close();
+                }
+            }
+            return new JsonResult(table);
         }
 
         // POST api/<PostController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public JsonResult Post(Post post)
         {
+            string query = @"insert into Post (Title,Text,CategoryId,Id) values ('" + post.Title + "','" + post.Text + "','" + post.CategoryId + "','" + post.Id + "')";
+            DataTable table = new DataTable();
+            string sqlDataSource = configuration.GetConnectionString("DataConnection");
+            SqlDataReader dataReader;
+            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    dataReader = command.ExecuteReader();
+                    table.Load(dataReader);
+                    dataReader.Close();
+                    connection.Close();
+                }
+            }
+            return new JsonResult("Data Inserted");
         }
 
         // PUT api/<PostController>/5

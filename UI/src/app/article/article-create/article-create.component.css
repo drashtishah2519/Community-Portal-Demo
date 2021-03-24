@@ -52,3 +52,7 @@
     margin-top: 30px;
     padding: 30px;
 }
+
+#iframeRTE p{
+    background-color: aqua;
+}

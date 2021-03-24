@@ -44,18 +44,18 @@ export class LoginComponent implements OnInit {
         (res:any)=>{
           localStorage.setItem('token',res.token);
           this._router.navigateByUrl('/home');
+          console.log("WOW!! You have successfully logged in");
         },
         (err:any)=>{
           if(err.status == 400){
             alert('Incorrect Username or Password');
           } else{
-            console.log(err.message);
+            console.log('Error while connecting to the server' + err.message);
             
           }
         }
       );
       this.showModal = false;
-      console.log("WOW!! You have successfully logged in");
       // this._router.navigate(['/user-profile'])
     }
   }

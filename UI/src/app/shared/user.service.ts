@@ -22,7 +22,7 @@ export class UserService {
    
     Password: ['', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
 
-    confirmpassword: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
+    confirmpassword: ['', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
     },{ 
       validator: ConfirmedValidator('Password', 'confirmpassword')
     }
@@ -35,7 +35,7 @@ export class UserService {
       Email : this.formModel.value.Email,
       Password : this.formModel.value.Password,
       FirstName : this.formModel.value.FirstName,
-      LastName : this.formModel.value.LastName0,
+      LastName : this.formModel.value.LastName,
     };
     return this.http.post(this.APIURL + "/ApplicationUser/Register",body);
   }
@@ -46,5 +46,17 @@ export class UserService {
 
   getUserProfile(){
     return this.http.get(this.APIURL + '/UserProfile');
+  }
+
+  getCategories(){
+    return this.http.get(this.APIURL + '/Category');
+  }
+
+  getAllArticles(){
+    return this.http.get(this.APIURL + '/Post');
+  }
+  
+  postArticle(article:any){
+    return this.http.post(this.APIURL + '/Post',article);
   }
 }
