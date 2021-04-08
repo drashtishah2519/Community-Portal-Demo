@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,18 +13,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class ArticleController : ControllerBase
     {
         private readonly IConfiguration configuration;
-        public PostController(IConfiguration config)
+        public CategoryController(IConfiguration config)
         {
             this.configuration = config;
         }
-        // GET: api/<PostController>
+        // GET: api/<ArticleController>
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select * from Post";
+            string query = @"select * from Articles";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -42,12 +41,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-
-        // GET api/<PostController>/5
+        // GET api/<ArticleController>/5
         [HttpGet("{id}")]
-        public JsonResult Get(String id)
+        public JsonResult Get(int id)
         {
-            string query = @"select * from Post where Id = '" + id + "'";
+            string query = @"select * from Articles where Article_id = " + id;
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -65,11 +63,11 @@ namespace WebAPI.Controllers
             return new JsonResult(table);
         }
 
-        // POST api/<PostController>
+        // POST api/<ArticleController>
         [HttpPost]
-        public JsonResult Post(Post post)
+        public JsonResult Post(Article article)
         {
-            string query = @"insert into Post (Title,Text,CategoryId,Id) values ('" + post.Title + "','" + post.Text + "','" + post.CategoryId + "','" + post.Id + "')";
+            string query = @"insert into Articles (Title,Tags,CategoryId,Id) values ('" + post.Title + "','" + post.Text + "','" + post.CategoryId + "','" + post.Id + "')";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -84,16 +82,16 @@ namespace WebAPI.Controllers
                     connection.Close();
                 }
             }
-            return new JsonResult("Data Inserted");
+            return new JsonResult("Data Added");
         }
 
-        // PUT api/<PostController>/5
+        // PUT api/<ArticleController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<PostController>/5
+        // DELETE api/<ArticleController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { addClass, removeClass, Browser } from '@syncfusion/ej2-base';
 import { RichTextEditor, Toolbar, Link, Image, HtmlEditor, QuickToolbar, Table, FileManager } from '@syncfusion/ej2-richtexteditor';
 import { NgForm } from '@angular/forms';
+
 RichTextEditor.Inject(Toolbar, Link, Image, HtmlEditor, QuickToolbar, Table, FileManager);
 
 
@@ -16,7 +17,7 @@ RichTextEditor.Inject(Toolbar, Link, Image, HtmlEditor, QuickToolbar, Table, Fil
 export class ArticleCreateComponent implements OnInit {
   title = 'article-create';
   userDetails: any;
-
+  submitted = false;
   constructor(private _router : Router,private service:UserService) { }
 
   // ngOnInit(): void {
@@ -79,7 +80,9 @@ export class ArticleCreateComponent implements OnInit {
           actionComplete: actionCompleteHandler
         });
       iframeRTE.appendTo('#iframeRTE');
-  
+
+      // let formObject = new FormValidator('#form-element');
+      
       function handleFullScreen(e: any): void {
         let sbCntEle: HTMLElement = document.querySelector('.sb-content.e-view');
         let sbHdrEle: HTMLElement = document.querySelector('.sb-header.e-view');
@@ -123,8 +126,19 @@ export class ArticleCreateComponent implements OnInit {
         this._router.navigate(['/']);
   		}
 
-      onSubmit(form: NgForm): void {
-        alert(form.value.name);
+      onSubmit(form1) {
+        this.submitted = true;
+        console.log(form1.value);
+        
+  // let rteValue: string = this.rteObj.getHtml();
+        // this.service.postArticle(form.value).subscribe(
+        //   (res) => {
+        //     console.log(res);
+        //   },
+        //   (err) => {
+        //     console.log(err);
+        //   }
+        // )
       }   
 
   	// 	selectFile(event) {

@@ -7,26 +7,24 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class Post
+    public class Article
     {
         [Key]
-        public long PostId { get; set; }
+        [Required]
+        public int Article_id { get; set; }
+
+        [Column(TypeName = "nvarchar(100)")]
         [Required]
         public string Title { get; set; }
-        [Required]
-        public string Text { get; set; }
-        public DateTime PostedOn { get; set; }
+
         [Required]
         [ForeignKey("Category")]
         public short CategoryId { get; set; }
 
         [Required]
-        [ForeignKey("AspNetUsers")]
-        [Column(TypeName = "nvarchar(450)")]
-        public string Id { get; set; }
+        [Column(TypeName = "nvarchar(300)")]
+        public string Content { get; set; }
+        public DateTime PostedOn { get; set; }
         public Category Category { get; set; }
-        public ApplicationUser AspNetUsers { get; set; }
-
-       
     }
 }

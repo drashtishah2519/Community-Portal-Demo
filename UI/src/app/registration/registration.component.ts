@@ -33,12 +33,12 @@ export class RegistrationComponent implements OnInit {
           } else{
             console.log(res);
             res.Errors.forEach((element: any) => {
-              switch(element.code){
+              switch(element.Code){
                 case 'DuplicateUserName':
-                  alert('UserName already exist');
+                  alert(element.Description);
                   break;
                 default:
-                  console.log('Error Occured');
+                  console.log('Error Occured: ' + element.Description);
                   break;
               }
             });

@@ -14,5 +14,10 @@ namespace WebAPI.Models
         }
         public DbSet<Category> Category { get; set; }
         public DbSet<Post> Post { get; set; }
+
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<ArticleCommentCreate> ArticleCommentCreate { get; set; }
+     
+
     }
 }

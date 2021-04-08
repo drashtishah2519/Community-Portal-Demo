@@ -27,7 +27,6 @@ namespace WebAPI.Controllers
             this.appSettings = _appSettings.Value;
             this.userManager = _userManager;
             this.signInManager = _signInManager;
-
         }
 
         [HttpPost]

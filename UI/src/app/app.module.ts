@@ -18,6 +18,7 @@ import { ArticleCreateComponent } from './article/article-create/article-create.
 import { HomeComponent } from './home/home.component';
 import { UserService } from './shared/user.service';
 import { AuthInterceptor } from './auth/auth.intercepter';
+import { ArticleCommentComponent } from './article/article-comment/article-comment.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthInterceptor } from './auth/auth.intercepter';
     UserProfileComponent,
     ArticlePostsComponent,
     ArticleCreateComponent,
-    HomeComponent
+    HomeComponent,
+    ArticleCommentComponent
   ],
   imports: [
     BrowserModule,
