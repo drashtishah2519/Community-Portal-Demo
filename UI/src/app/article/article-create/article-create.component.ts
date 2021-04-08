@@ -7,14 +7,14 @@ import { RichTextEditor, Toolbar, Link, Image, HtmlEditor, Count, QuickToolbar }
 import { FormValidator } from '@syncfusion/ej2-inputs';
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
-import { ToolbarService ,LinkService, ImageService, HtmlEditorService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
+import { ToolbarService ,LinkService, ImageService, HtmlEditorService, QuickToolbarService , FileManagerService} from '@syncfusion/ej2-angular-richtexteditor';
 RichTextEditor.Inject(Toolbar, Link, Image, HtmlEditor, Count, QuickToolbar);
 
 @Component({
   selector: 'app-article-create',
   templateUrl: './article-create.component.html',
   styleUrls: ['./article-create.component.css'],
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService]
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService, FileManagerService]
 })
 
 export class ArticleCreateComponent implements OnInit {
@@ -25,6 +25,9 @@ export class ArticleCreateComponent implements OnInit {
   private toolbarSettings: Object = {
     items: ['Image']
   };
+  private iFrameSettings : Object = {
+    enable: true
+  }
   private insertImageSettings: Object = {
       saveUrl: 'http://localhost:65241/api/Post/image',
       path: 'http://localhost:65241/Uploads/',
@@ -48,7 +51,39 @@ export class ArticleCreateComponent implements OnInit {
         }
       );
 
-    let defaultRTE: RichTextEditor = new RichTextEditor({ showCharCount: true, maxLength: 100, placeholder: 'Type something', insertImageSettings: this.insertImageSettings });
+    let defaultRTE: RichTextEditor = new RichTextEditor({ showCharCount: true, placeholder: 'Type something', 
+          height: 300,
+          iframeSettings: {
+              enable: true
+          },
+          toolbarSettings: {
+            items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+                'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
+                'LowerCase', 'UpperCase', 'SuperScript', 'SubScript', '|',
+                'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
+                'Outdent', 'Indent', '|',
+                'CreateTable', 'CreateLink', 'Image', 'FileManager', '|', 'ClearFormat', 'Print',
+                'SourceCode', 'FullScreen', '|', 'Undo', 'Redo'
+            ]
+          },
+          insertImageSettings: {
+            saveUrl: 'http://localhost:65241/api/Post/image',
+            path: 'http://localhost:65241/Uploads/',
+            removeUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Remove',
+            // maxWidth: '400px',
+            // maxHeight: '400px',
+            minWidth: '80px',
+            minHeight: '80px'
+          },
+          fileManagerSettings: {
+            enable: true,
+            path: '/Pictures/Food',
+            ajaxSettings: {
+                url: 'http://localhost:65241/api/Post/image',
+                uploadUrl: 'http://localhost:65241/api/Post/image'
+            }
+        }
+});
     defaultRTE.appendTo('#defaultRTE');
     let formObject = new FormValidator('#form-element');
 
@@ -78,32 +113,32 @@ export class ArticleCreateComponent implements OnInit {
     //   let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
   
     //   let iframeRTE: RichTextEditor = new RichTextEditor({
-    //       height: 300,
-    //       iframeSettings: {
-    //           enable: true
-    //       },
-    //       toolbarSettings: {
-    //         items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
-    //             'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
-    //             'LowerCase', 'UpperCase', 'SuperScript', 'SubScript', '|',
-    //             'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
-    //             'Outdent', 'Indent', '|',
-    //             'CreateTable', 'CreateLink', 'Image', 'FileManager', '|', 'ClearFormat', 'Print',
-    //             'SourceCode', 'FullScreen', '|', 'Undo', 'Redo'
-    //         ]
-    //       },
-    //       fileManagerSettings: {
-    //           enable: true,
-    //           path: '/Pictures/Food',
-    //           ajaxSettings: {
-    //               url: hostUrl + 'api/FileManager/FileOperations',
-    //               getImageUrl: hostUrl + 'api/FileManager/GetImage',
-    //               uploadUrl: hostUrl + 'api/FileManager/Upload',
-    //               downloadUrl: hostUrl + 'api/FileManager/Download'
-    //           }
-    //       },
-    //       actionBegin: handleFullScreen,
-    //       actionComplete: actionCompleteHandler
+          // height: 300,
+          // iframeSettings: {
+          //     enable: true
+          // },
+          // toolbarSettings: {
+          //   items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+          //       'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
+          //       'LowerCase', 'UpperCase', 'SuperScript', 'SubScript', '|',
+          //       'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
+          //       'Outdent', 'Indent', '|',
+          //       'CreateTable', 'CreateLink', 'Image', 'FileManager', '|', 'ClearFormat', 'Print',
+          //       'SourceCode', 'FullScreen', '|', 'Undo', 'Redo'
+          //   ]
+          // },
+          // fileManagerSettings: {
+          //     enable: true,
+          //     path: '/Pictures/Food',
+          //     ajaxSettings: {
+          //         url: hostUrl + 'api/FileManager/FileOperations',
+          //         getImageUrl: hostUrl + 'api/FileManager/GetImage',
+          //         uploadUrl: hostUrl + 'api/FileManager/Upload',
+          //         downloadUrl: hostUrl + 'api/FileManager/Download'
+          //     }
+          // },
+          // actionBegin: handleFullScreen,
+          // actionComplete: actionCompleteHandler
     //     });
     //   iframeRTE.appendTo('#iframeRTE');
 
