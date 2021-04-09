@@ -12,8 +12,10 @@ namespace WebAPI.Models
         [Key]
         [Column("Section_Id")]
         public int SectionId { get; set; }
+        [Required]
         [Column("Section_Name")]
         public string SectionName { get; set; }
+        [Required]
         [Column("Section_Description")]
         public string SectionDescription { get; set; }
         [ForeignKey("AspNetUsers")]

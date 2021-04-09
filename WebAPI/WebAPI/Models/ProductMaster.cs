@@ -19,6 +19,6 @@ namespace WebAPI.Models
         [ForeignKey("AspNetUsers")]
         [Column("User_Id")]
         public string Id { get; set; }
-        public ApplicationUser AspNetUsers { get; set; }
+        public ApplicationUser AspNetUsers { get; set; }    
     }
 }

@@ -8,24 +8,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticleMasterController : ControllerBase
+    public class LabelMasterController : Controller
     {
         readonly private IConfiguration configuration;
-        public ArticleMasterController(IConfiguration _configuration)
+        public LabelMasterController(IConfiguration _configuration)
         {
-            this.configuration = _configuration;
+            configuration = _configuration;
         }
-        // GET: api/<ArticleMasterController>
         [HttpGet]
+        // GET: ProductMasterController
         public JsonResult Get()
         {
-            string query = @"select * from ArticleMaster";
+            string query = @"select * from LabelMaster";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -43,11 +41,11 @@ namespace WebAPI.Controllers
             return new JsonResult(table);
         }
 
-        // GET api/<ArticleMasterController>/5
         [HttpGet("{id}")]
+        // GET: ProductMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from ArticleMaster where Article_Id = '" + id + "'";
+            string query = @"select * from LabelMaster where Label_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -64,28 +62,14 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-        // POST api/<ArticleMasterController>
+
+        // POST: ProductMasterController/Create
         [HttpPost]
-        public JsonResult Create(ArticleMaster article)
+        public JsonResult Create(LabelMaster label)
         {
             try
             {
-                string query = @"insert into ArticleMaster (Article_Title,Category_Id,Section_Id,User_Id,Reviewer_Id,Product_Id,Description,Visibility,Status,CommentAllow,UseFullTotal,UseFullCount,Draft,Archive) values
-                ('" + article.ArticleTitle + "','" 
-                + article.CategoryId + "','" 
-                + article.SectionId + "','" 
-                + article.Id + "','"
-                + article.ReviewerId + "','"
-                + article.ProductId + "','"
-                + article.Article_Description + "','"
-                + article.Visible + "','"
-                + article.status + "','"
-                + article.CommentAllow + "','"
-                + article.UseFullTotal + "','"
-                + article.UseFullCount + "','"
-                + article.Draft + "','"
-                + article.Archive + "')";
-
+                string query = @"insert into LabelMaster (Label_Name) values ('" + label.LabelName +  "')";
                 DataTable table = new DataTable();
                 string sqlDataSource = configuration.GetConnectionString("DataConnection");
                 SqlDataReader dataReader;
@@ -102,32 +86,17 @@ namespace WebAPI.Controllers
                 }
                 return new JsonResult("Data Inserted");
             }
-            catch(Exception e)
+            catch
             {
-                return new JsonResult(e.Message);
+                return new JsonResult("Unauthorized user");
             }
         }
 
         [HttpPut]
         // GET: ProductMasterController/Edit/5
-        public ActionResult Edit(ArticleMaster article)
+        public ActionResult Edit(LabelMaster label)
         {
-            string query = @"Update ProductMaster set 
-                Article_Title ='" + article.ArticleTitle + "', " +
-                "Category_Id = '" + article.CategoryId +
-                "Section_Id = '" + article.SectionId +
-                "User_Id = '" + article.Id +
-                "Reviewer_Id = '" + article.ReviewerId +
-                "Product_Id = '" + article.ProductId +
-                "Description = '" + article.Article_Description +
-                "Visibility = '" + article.Visible +
-                "Status = '" + article.status +
-                "CommentAllow = '" + article.CommentAllow +
-                "UseFullTotal = '" + article.UseFullTotal +
-                "UseFullCount = '" + article.UseFullCount +
-                "Draft = '" + article.Draft +
-                "Archive = '" + article.Archive +
-                "' where Article_Id = " + article.ArticleId;
+            string query = @"Update LabelMaster set Label_Name = '" + label.LabelName + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -149,7 +118,7 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ArticleMaster where Article_Id = '" + id + "'";
+            string query = @"delete from dbo.LabelMaster where Label_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;

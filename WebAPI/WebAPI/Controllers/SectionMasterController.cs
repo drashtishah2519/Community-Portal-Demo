@@ -8,24 +8,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticleMasterController : ControllerBase
+    public class SectionMasterController : Controller
     {
         readonly private IConfiguration configuration;
-        public ArticleMasterController(IConfiguration _configuration)
+        public SectionMasterController(IConfiguration _configuration)
         {
             this.configuration = _configuration;
         }
-        // GET: api/<ArticleMasterController>
         [HttpGet]
+        // GET: SectionMasterController
         public JsonResult Get()
         {
-            string query = @"select * from ArticleMaster";
+            string query = @"select * from SectionMaster";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -42,12 +40,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-
-        // GET api/<ArticleMasterController>/5
         [HttpGet("{id}")]
+        // GET: SectionMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from ArticleMaster where Article_Id = '" + id + "'";
+            string query = @"select * from SectionMaster where Section_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -64,28 +61,34 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-        // POST api/<ArticleMasterController>
+        [HttpGet("{Uid}")]
+        // GET: SectionMasterController/Details/5
+        public JsonResult GetSectionByUser(string Uid)
+        {
+            string query = @"select * from SectionMaster where User_Id = '" + Uid + "'";
+            DataTable table = new DataTable();
+            string sqlDataSource = configuration.GetConnectionString("DataConnection");
+            SqlDataReader dataReader;
+            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    dataReader = command.ExecuteReader();
+                    table.Load(dataReader);
+                    dataReader.Close();
+                    connection.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
+        // POST: SectionMasterController/Create
         [HttpPost]
-        public JsonResult Create(ArticleMaster article)
+        public JsonResult Create(SectionMaster section)
         {
             try
             {
-                string query = @"insert into ArticleMaster (Article_Title,Category_Id,Section_Id,User_Id,Reviewer_Id,Product_Id,Description,Visibility,Status,CommentAllow,UseFullTotal,UseFullCount,Draft,Archive) values
-                ('" + article.ArticleTitle + "','" 
-                + article.CategoryId + "','" 
-                + article.SectionId + "','" 
-                + article.Id + "','"
-                + article.ReviewerId + "','"
-                + article.ProductId + "','"
-                + article.Article_Description + "','"
-                + article.Visible + "','"
-                + article.status + "','"
-                + article.CommentAllow + "','"
-                + article.UseFullTotal + "','"
-                + article.UseFullCount + "','"
-                + article.Draft + "','"
-                + article.Archive + "')";
-
+                string query = @"insert into SectionMaster (Section_Name,Section_Description,User_Id,Category_Id) values ('" + section.SectionName + "','" + section.SectionDescription + "','" + section.Id + "','" + section.CategoryId + "')";
                 DataTable table = new DataTable();
                 string sqlDataSource = configuration.GetConnectionString("DataConnection");
                 SqlDataReader dataReader;
@@ -102,32 +105,16 @@ namespace WebAPI.Controllers
                 }
                 return new JsonResult("Data Inserted");
             }
-            catch(Exception e)
+            catch
             {
-                return new JsonResult(e.Message);
+                return new JsonResult("Unauthorized user");
             }
         }
-
         [HttpPut]
         // GET: ProductMasterController/Edit/5
-        public ActionResult Edit(ArticleMaster article)
+        public ActionResult Edit(SectionMaster section)
         {
-            string query = @"Update ProductMaster set 
-                Article_Title ='" + article.ArticleTitle + "', " +
-                "Category_Id = '" + article.CategoryId +
-                "Section_Id = '" + article.SectionId +
-                "User_Id = '" + article.Id +
-                "Reviewer_Id = '" + article.ReviewerId +
-                "Product_Id = '" + article.ProductId +
-                "Description = '" + article.Article_Description +
-                "Visibility = '" + article.Visible +
-                "Status = '" + article.status +
-                "CommentAllow = '" + article.CommentAllow +
-                "UseFullTotal = '" + article.UseFullTotal +
-                "UseFullCount = '" + article.UseFullCount +
-                "Draft = '" + article.Draft +
-                "Archive = '" + article.Archive +
-                "' where Article_Id = " + article.ArticleId;
+            string query = @"Update SectionMaster set Section_Name ='" + section.SectionName + "', Section_Description = '" + section.SectionDescription + "',User_Id = '" + section.Id + "', Category_Id = '" + section.CategoryId + "' where Section_Id = " + section.SectionId;
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -144,12 +131,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult("Data Updated");
         }
-
         [HttpDelete]
-        // GET: ProductMasterController/Delete/5
+        // GET: SectionMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ArticleMaster where Article_Id = '" + id + "'";
+            string query = @"delete from dbo.SectionMaster where Section_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;

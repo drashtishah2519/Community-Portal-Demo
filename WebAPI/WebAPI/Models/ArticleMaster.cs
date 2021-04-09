@@ -23,8 +23,9 @@ namespace WebAPI.Models
         [ForeignKey("AspNetUsers")]
         [Column("User_Id")]
         public string Id { get; set; }
+        
         [Column("Reviewer_Id")]
-        public String ReviewerId { get; set; }
+        public string ReviewerId { get; set; }
         [ForeignKey("ProductMaster")]
         [Column("Product_Id")]
         public int ProductId { get; set; }

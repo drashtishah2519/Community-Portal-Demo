@@ -64,6 +64,28 @@ namespace WebAPI.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("{Uid}")]
+        // GET: ProductMasterController/Details/5
+        public JsonResult GetProductByUser(string Uid)
+        {
+            string query = @"select * from ProductMaster where User_Id = '" + Uid + "'";
+            DataTable table = new DataTable();
+            string sqlDataSource = configuration.GetConnectionString("DataConnection");
+            SqlDataReader dataReader;
+            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    dataReader = command.ExecuteReader();
+                    table.Load(dataReader);
+                    dataReader.Close();
+                    connection.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
+
         // POST: ProductMasterController/Create
         [HttpPost]
         public JsonResult Create(ProductMaster product)
@@ -89,7 +111,9 @@ namespace WebAPI.Controllers
             }
             catch
             {
+
                 return new JsonResult("Unauthorized User");
+
             }
         }
 
@@ -97,7 +121,7 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Edit/5
         public ActionResult Edit(ProductMaster product)
         {
-            string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "' where Product_Id = " + product.productId;
+            string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "',User_Id = '" + product.Id + "' where Product_Id = " + product.productId;
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
