@@ -53,15 +53,15 @@
 
 <div class="container">
   <h1 class="text-center">Create Article</h1>
-  <form #form="ngForm" #rteForm="ngForm" (ngSubmit)="onSubmit(form)" id="form-element">
+  <form #imageForm="ngForm" #rteForm="ngForm" id="form-element">
       <div class="mb-3">
       <label class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" placeholder="Title.." name="title" autocomplete="off">
+      <input type="text" #Title ngModel class="form-control" id="title" placeholder="Title.." name="title" autocomplete="off">
       </div>
       
       <div class="mb-3">
         <label for="formFile" class="form-label">Select Category</label>
-        <select class="form-select" aria-label="Default select example" name="category" aria-placeholder="Choose Category">
+        <select class="form-select" aria-label="Default select example" name="category" aria-placeholder="Choose Category" id="category">
           <option selected>Choose Category</option>
           <option value="1">Fashion</option>
           <option value="2">Food</option>
@@ -81,7 +81,7 @@
             <div><img [src]="url" *ngIf="url"></div> -->
     </div>
 
-      <div class="mb-3">
+      <!-- <div class="mb-3">
           <label class="form-label">Description</label>
         <div class="sample-container">
           <div class="default-section">
@@ -89,19 +89,23 @@
             </div>
           </div>
         </div>
-          <!-- <ejs-richtexteditor id="iframeRTE" #toolsRTE id='alltoolRTE' >
-          </ejs-richtexteditor> -->
-          <!-- <div *ngIf="(name.invalid && name.touched)" class="alert alert-danger">
-            <div *ngIf="name.errors.required">
-                Value is required.
-            </div> -->
-          <!-- </div> -->
-        </div>
+        </div> -->
         
+        <div class="form-group mt-3">
+          <textarea id="defaultRTE" required name="defaultRTE" class="form-control"></textarea>
+          <div id="dateError" style="padding-top: 10px"></div>
+      </div>
+      <div class="form-group">
+          <div class="col-sm-3 control-label"></div>
+          <div class="col-sm-6">
+              <div id='error'></div>
+          </div>
+      </div>
+
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <button type="reset" class="btn btn-danger me-md-2">Reset</button>
-          <button class="btn btn-primary me-md-2" type="button" ejs-button [disabled]="!rteForm.valid">Save as Draft</button>
-          <button class="btn btn-success" type="submit" ejs-button [disabled]="!rteForm.valid">Publish Live</button>
+          <button class="btn btn-primary me-md-2" type="button"  ejs-button [disabled]="!rteForm.valid">Save as Draft</button>
+          <button class="btn btn-success" type="submit" id="validateSubmit" ejs-button [disabled]="!rteForm.valid">Publish Live</button>
       </div>
   </form>
 </div>

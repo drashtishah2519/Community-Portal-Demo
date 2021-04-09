@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation  } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-article-posts',
   templateUrl: './article-posts.component.html',
-  styleUrls: ['./article-posts.component.css']
+  styleUrls: ['./article-posts.component.css'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ArticlePostsComponent implements OnInit {
 
@@ -20,8 +21,6 @@ export class ArticlePostsComponent implements OnInit {
     this.service.getAllArticles().subscribe(
       (res) => {
         this.Articles = res;
-        console.log(this.Articles);
-        
       }, (err) => {
         console.log(err);
       }
