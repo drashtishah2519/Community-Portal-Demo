@@ -12,6 +12,7 @@ namespace WebAPI.Models
         [Key]
         [Column("Label_Id")]
         public int LabelId { get; set; }
+        [Required]
         [Column("Label_Name")]
         public string LabelName { get; set; }
     }

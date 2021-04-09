@@ -23,64 +23,85 @@ namespace WebAPI.Controllers
         // GET: SectionMasterController
         public JsonResult Get()
         {
-            string query = @"select * from SectionMaster";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from SectionMaster";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
-        [HttpGet("{id}")]
+        [HttpGet("section/{id:int}")]
         // GET: SectionMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from SectionMaster where Section_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from SectionMaster where Section_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
-        [HttpGet("{Uid}")]
+        [HttpGet("user/{Uid}")]
         // GET: SectionMasterController/Details/5
         public JsonResult GetSectionByUser(string Uid)
         {
-            string query = @"select * from SectionMaster where User_Id = '" + Uid + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from SectionMaster where User_Id = '" + Uid + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
         // POST: SectionMasterController/Create
         [HttpPost]
@@ -114,43 +135,57 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Edit/5
         public ActionResult Edit(SectionMaster section)
         {
-            string query = @"Update SectionMaster set Section_Name ='" + section.SectionName + "', Section_Description = '" + section.SectionDescription + "',User_Id = '" + section.Id + "', Category_Id = '" + section.CategoryId + "' where Section_Id = " + section.SectionId;
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"Update SectionMaster set Section_Name ='" + section.SectionName + "', Section_Description = '" + section.SectionDescription + "',User_Id = '" + section.Id + "', Category_Id = '" + section.CategoryId + "' where Section_Id = " + section.SectionId;
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Updated");
             }
-            return new JsonResult("Data Updated");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
         [HttpDelete]
         // GET: SectionMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.SectionMaster where Section_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"delete from dbo.SectionMaster where Section_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Deleted");
             }
-            return new JsonResult("Data Deleted");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
     }
 }

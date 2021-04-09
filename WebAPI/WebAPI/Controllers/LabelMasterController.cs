@@ -20,50 +20,64 @@ namespace WebAPI.Controllers
             configuration = _configuration;
         }
         [HttpGet]
-        // GET: ProductMasterController
+        // GET: LabelMasterController
         public JsonResult Get()
         {
-            string query = @"select * from LabelMaster";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from LabelMaster";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
         [HttpGet("{id}")]
-        // GET: ProductMasterController/Details/5
+        // GET: LabelMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from LabelMaster where Label_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from LabelMaster where Label_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
-        // POST: ProductMasterController/Create
+        // POST: LabelMasterController/Create
         [HttpPost]
         public JsonResult Create(LabelMaster label)
         {
@@ -93,7 +107,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        // GET: ProductMasterController/Edit/5
+        // GET: LabelMasterController/Edit/5
         public ActionResult Edit(LabelMaster label)
         {
             string query = @"Update LabelMaster set Label_Name = '" + label.LabelName + "'";
@@ -115,7 +129,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        // GET: ProductMasterController/Delete/5
+        // GET: LabelMasterController/Delete/5
         public ActionResult Delete(int id)
         {
             string query = @"delete from dbo.LabelMaster where Label_Id = '" + id + "'";

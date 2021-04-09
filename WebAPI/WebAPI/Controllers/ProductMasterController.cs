@@ -24,66 +24,87 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController
         public JsonResult Get()
         {
-            string query = @"select * from ProductMaster";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from ProductMaster";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("product/{id:int}")]
         // GET: ProductMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from ProductMaster where Product_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from ProductMaster where Product_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
-        [HttpGet("{Uid}")]
+        [HttpGet("user/{Uid}")]
         // GET: ProductMasterController/Details/5
-        public JsonResult GetProductByUser(string Uid)
+        public JsonResult Get(string Uid)
         {
-            string query = @"select * from ProductMaster where User_Id = '" + Uid + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from ProductMaster where User_Id = '" + Uid + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
         // POST: ProductMasterController/Create
@@ -109,11 +130,9 @@ namespace WebAPI.Controllers
                 }
                 return new JsonResult("Data Inserted");
             }
-            catch
+            catch(Exception e)
             {
-
-                return new JsonResult("Unauthorized User");
-
+                return new JsonResult(e.Message);
             }
         }
 
@@ -121,44 +140,58 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Edit/5
         public ActionResult Edit(ProductMaster product)
         {
-            string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "',User_Id = '" + product.Id + "' where Product_Id = " + product.productId;
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "',User_Id = '" + product.Id + "' where Product_Id = " + product.productId;
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Updated");
             }
-            return new JsonResult("Data Updated");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
         [HttpDelete]
         // GET: ProductMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ProductMaster where Product_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"delete from dbo.ProductMaster where Product_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Deleted");
             }
-            return new JsonResult("Data Deleted");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
     }
 }

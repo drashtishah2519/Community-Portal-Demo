@@ -16,13 +16,13 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationUserController : ControllerBase
+    public class AuthenticationDbContext : ControllerBase
     {
         private UserManager<ApplicationUser> userManager;
         private SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationSettings appSettings;
-
-        public ApplicationUserController(UserManager<ApplicationUser> _userManager,SignInManager<ApplicationUser> _signInManager,IOptions<ApplicationSettings> _appSettings)
+        
+        public AuthenticationDbContext(UserManager<ApplicationUser> _userManager,SignInManager<ApplicationUser> _signInManager,IOptions<ApplicationSettings> _appSettings)
         {
             this.appSettings = _appSettings.Value;
             this.userManager = _userManager;

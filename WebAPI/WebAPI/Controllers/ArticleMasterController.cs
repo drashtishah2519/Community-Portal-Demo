@@ -25,44 +25,87 @@ namespace WebAPI.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select * from ArticleMaster";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from ArticleMaster";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
 
         // GET api/<ArticleMasterController>/5
-        [HttpGet("{id}")]
+        [HttpGet("article/{id}")]
         public JsonResult Get(int id)
         {
-            string query = @"select * from ArticleMaster where Article_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"select * from ArticleMaster where Article_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult(table);
             }
-            return new JsonResult(table);
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
+        }
+
+        // GET api/<ArticleMasterController>/5
+        [HttpGet("user/{uid}")]
+        public JsonResult Get(string uid)
+        {
+            try
+            {
+                string query = @"select * from ArticleMaster where User_Id = '" + uid + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
+                }
+                return new JsonResult(table);
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
         // POST api/<ArticleMasterController>
         [HttpPost]
@@ -77,9 +120,9 @@ namespace WebAPI.Controllers
                 + article.Id + "','"
                 + article.ReviewerId + "','"
                 + article.ProductId + "','"
-                + article.Article_Description + "','"
+                + article.ArticleDescription + "','"
                 + article.Visible + "','"
-                + article.status + "','"
+                + article.Status + "','"
                 + article.CommentAllow + "','"
                 + article.UseFullTotal + "','"
                 + article.UseFullCount + "','"
@@ -112,59 +155,73 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Edit/5
         public ActionResult Edit(ArticleMaster article)
         {
-            string query = @"Update ProductMaster set 
-                Article_Title ='" + article.ArticleTitle + "', " +
-                "Category_Id = '" + article.CategoryId +
-                "Section_Id = '" + article.SectionId +
-                "User_Id = '" + article.Id +
-                "Reviewer_Id = '" + article.ReviewerId +
-                "Product_Id = '" + article.ProductId +
-                "Description = '" + article.Article_Description +
-                "Visibility = '" + article.Visible +
-                "Status = '" + article.status +
-                "CommentAllow = '" + article.CommentAllow +
-                "UseFullTotal = '" + article.UseFullTotal +
-                "UseFullCount = '" + article.UseFullCount +
-                "Draft = '" + article.Draft +
-                "Archive = '" + article.Archive +
-                "' where Article_Id = " + article.ArticleId;
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"Update ProductMaster set 
+                Article_Title ='" + article.ArticleTitle + "', " +
+                        "Category_Id = '" + article.CategoryId +
+                        "Section_Id = '" + article.SectionId +
+                        "User_Id = '" + article.Id +
+                        "Reviewer_Id = '" + article.ReviewerId +
+                        "Product_Id = '" + article.ProductId +
+                        "Description = '" + article.ArticleDescription +
+                        "Visibility = '" + article.Visible +
+                        "Status = '" + article.Status +
+                        "CommentAllow = '" + article.CommentAllow +
+                        "UseFullTotal = '" + article.UseFullTotal +
+                        "UseFullCount = '" + article.UseFullCount +
+                        "Draft = '" + article.Draft +
+                        "Archive = '" + article.Archive +
+                        "' where Article_Id = " + article.ArticleId;
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Updated");
             }
-            return new JsonResult("Data Updated");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message); ;
+            }
         }
 
         [HttpDelete]
         // GET: ProductMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ArticleMaster where Article_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
+            try
             {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = @"delete from dbo.ArticleMaster where Article_Id = '" + id + "'";
+                DataTable table = new DataTable();
+                string sqlDataSource = configuration.GetConnectionString("DataConnection");
+                SqlDataReader dataReader;
+                using (SqlConnection connection = new SqlConnection(sqlDataSource))
                 {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        dataReader = command.ExecuteReader();
+                        table.Load(dataReader);
+                        dataReader.Close();
+                        connection.Close();
+                    }
                 }
+                return new JsonResult("Data Deleted");
             }
-            return new JsonResult("Data Deleted");
+            catch (Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
         }
     }
 }
