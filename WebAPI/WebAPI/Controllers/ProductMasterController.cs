@@ -111,7 +111,9 @@ namespace WebAPI.Controllers
             }
             catch
             {
-                return new JsonResult("Unauthorized user");
+
+                return new JsonResult("Unauthorized User");
+
             }
         }
 

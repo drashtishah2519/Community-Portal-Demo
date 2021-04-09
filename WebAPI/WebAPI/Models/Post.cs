@@ -19,12 +19,14 @@ namespace WebAPI.Models
         [Required]
         [ForeignKey("Category")]
         public short CategoryId { get; set; }
-        
+
         [Required]
         [ForeignKey("AspNetUsers")]
         [Column(TypeName = "nvarchar(450)")]
         public string Id { get; set; }
         public Category Category { get; set; }
         public ApplicationUser AspNetUsers { get; set; }
+
+       
     }
 }

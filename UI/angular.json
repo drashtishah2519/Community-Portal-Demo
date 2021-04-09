@@ -31,8 +31,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -126,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "UI"
+  "defaultProject": "UI",
+  "cli": {
+    "analytics": false
+  }
 }

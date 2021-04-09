@@ -19,16 +19,16 @@ export class UserService {
     UserName: ['',[Validators.required,  Validators.minLength(2), Validators.pattern('^[_A-z0-9]*((-|\s)*[_A-z0-9])*$')]],
 
     Email: ['', [Validators.required, Validators.email]],
-   
+
     Password: ['', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
 
     confirmpassword: ['', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
-    },{ 
+    },{
       validator: ConfirmedValidator('Password', 'confirmpassword')
     }
   );
   get f() { return this.formModel.controls; }
-  
+
   register(){
     var body = {
       UserName : this.formModel.value.UserName,
@@ -55,7 +55,7 @@ export class UserService {
   getAllArticles(){
     return this.http.get(this.APIURL + '/Post');
   }
-  
+
   postArticle(article:any){
     return this.http.post(this.APIURL + '/Post',article);
   }

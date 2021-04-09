@@ -65,11 +65,11 @@ namespace WebAPI.Controllers
 
         // POST: ProductMasterController/Create
         [HttpPost]
-        public JsonResult Create(LabelMaster product)
+        public JsonResult Create(LabelMaster label)
         {
             try
             {
-                string query = @"insert into ProductMaster (Product_Name,Product_Description,User_Id) values ('" + product.ProductName + "','" + product.ProductDescription + "','" + product.Id + "')";
+                string query = @"insert into LabelMaster (Label_Name) values ('" + label.LabelName +  "')";
                 DataTable table = new DataTable();
                 string sqlDataSource = configuration.GetConnectionString("DataConnection");
                 SqlDataReader dataReader;
