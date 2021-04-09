@@ -14,10 +14,11 @@ namespace WebAPI.Models
         public int productId { get; set; }
         [Column("Product_Name")]
         public string ProductName { get; set; }
+        [Column("Product_Description")]
         public string ProductDescription { get; set; }
         [ForeignKey("AspNetUsers")]
         [Column("User_Id")]
         public string Id { get; set; }
-        public ApplicationUser AspNetUsers { get; set; }
+        public ApplicationUser AspNetUsers { get; set; }    
     }
 }

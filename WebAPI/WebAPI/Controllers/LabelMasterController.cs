@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,18 +12,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductMasterController : Controller
+    public class LabelMasterController : Controller
     {
         readonly private IConfiguration configuration;
-        public ProductMasterController(IConfiguration _configuration)
+        public LabelMasterController(IConfiguration _configuration)
         {
-            this.configuration = _configuration;
+            configuration = _configuration;
         }
         [HttpGet]
         // GET: ProductMasterController
         public JsonResult Get()
         {
-            string query = @"select * from ProductMaster";
+            string query = @"select * from LabelMaster";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -46,29 +45,7 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from ProductMaster where Product_Id = '" + id + "'";
-            DataTable table = new DataTable();
-            string sqlDataSource = configuration.GetConnectionString("DataConnection");
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection(sqlDataSource))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    dataReader = command.ExecuteReader();
-                    table.Load(dataReader);
-                    dataReader.Close();
-                    connection.Close();
-                }
-            }
-            return new JsonResult(table);
-        }
-
-        [HttpGet("{Uid}")]
-        // GET: ProductMasterController/Details/5
-        public JsonResult GetProductByUser(string Uid)
-        {
-            string query = @"select * from ProductMaster where User_Id = '" + Uid + "'";
+            string query = @"select * from LabelMaster where Label_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -88,7 +65,7 @@ namespace WebAPI.Controllers
 
         // POST: ProductMasterController/Create
         [HttpPost]
-        public JsonResult Create(ProductMaster product)
+        public JsonResult Create(LabelMaster product)
         {
             try
             {
@@ -117,9 +94,9 @@ namespace WebAPI.Controllers
 
         [HttpPut]
         // GET: ProductMasterController/Edit/5
-        public ActionResult Edit(ProductMaster product)
+        public ActionResult Edit(LabelMaster label)
         {
-            string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "',User_Id = '" + product.Id + "' where Product_Id = " + product.productId;
+            string query = @"Update LabelMaster set Label_Name = '" + label.LabelName + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -141,7 +118,7 @@ namespace WebAPI.Controllers
         // GET: ProductMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ProductMaster where Product_Id = '" + id + "'";
+            string query = @"delete from dbo.LabelMaster where Label_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;

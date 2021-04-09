@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,18 +12,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductMasterController : Controller
+    public class SectionMasterController : Controller
     {
         readonly private IConfiguration configuration;
-        public ProductMasterController(IConfiguration _configuration)
+        public SectionMasterController(IConfiguration _configuration)
         {
             this.configuration = _configuration;
         }
         [HttpGet]
-        // GET: ProductMasterController
+        // GET: SectionMasterController
         public JsonResult Get()
         {
-            string query = @"select * from ProductMaster";
+            string query = @"select * from SectionMaster";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -41,12 +40,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-
         [HttpGet("{id}")]
-        // GET: ProductMasterController/Details/5
+        // GET: SectionMasterController/Details/5
         public JsonResult Get(int id)
         {
-            string query = @"select * from ProductMaster where Product_Id = '" + id + "'";
+            string query = @"select * from SectionMaster where Section_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -63,12 +61,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-
         [HttpGet("{Uid}")]
-        // GET: ProductMasterController/Details/5
-        public JsonResult GetProductByUser(string Uid)
+        // GET: SectionMasterController/Details/5
+        public JsonResult GetSectionByUser(string Uid)
         {
-            string query = @"select * from ProductMaster where User_Id = '" + Uid + "'";
+            string query = @"select * from SectionMaster where User_Id = '" + Uid + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -85,14 +82,13 @@ namespace WebAPI.Controllers
             }
             return new JsonResult(table);
         }
-
-        // POST: ProductMasterController/Create
+        // POST: SectionMasterController/Create
         [HttpPost]
-        public JsonResult Create(ProductMaster product)
+        public JsonResult Create(SectionMaster section)
         {
             try
             {
-                string query = @"insert into ProductMaster (Product_Name,Product_Description,User_Id) values ('" + product.ProductName + "','" + product.ProductDescription + "','" + product.Id + "')";
+                string query = @"insert into SectionMaster (Section_Name,Section_Description,User_Id,Category_Id) values ('" + section.SectionName + "','" + section.SectionDescription + "','" + section.Id + "','" + section.CategoryId + "')";
                 DataTable table = new DataTable();
                 string sqlDataSource = configuration.GetConnectionString("DataConnection");
                 SqlDataReader dataReader;
@@ -114,12 +110,11 @@ namespace WebAPI.Controllers
                 return new JsonResult("Unauthorized user");
             }
         }
-
         [HttpPut]
         // GET: ProductMasterController/Edit/5
-        public ActionResult Edit(ProductMaster product)
+        public ActionResult Edit(SectionMaster section)
         {
-            string query = @"Update ProductMaster set Product_Name ='" + product.ProductName + "', Product_Description = '" + product.ProductDescription + "',User_Id = '" + product.Id + "' where Product_Id = " + product.productId;
+            string query = @"Update SectionMaster set Section_Name ='" + section.SectionName + "', Section_Description = '" + section.SectionDescription + "',User_Id = '" + section.Id + "', Category_Id = '" + section.CategoryId + "' where Section_Id = " + section.SectionId;
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
@@ -136,12 +131,11 @@ namespace WebAPI.Controllers
             }
             return new JsonResult("Data Updated");
         }
-
         [HttpDelete]
-        // GET: ProductMasterController/Delete/5
+        // GET: SectionMasterController/Delete/5
         public ActionResult Delete(int id)
         {
-            string query = @"delete from dbo.ProductMaster where Product_Id = '" + id + "'";
+            string query = @"delete from dbo.SectionMaster where Section_Id = '" + id + "'";
             DataTable table = new DataTable();
             string sqlDataSource = configuration.GetConnectionString("DataConnection");
             SqlDataReader dataReader;
